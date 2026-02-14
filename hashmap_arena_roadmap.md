@@ -74,6 +74,9 @@ Plot results and compare against theoretical expectations.
 
 ## Final Goal
 
-Understand: - Multiplicative hashing behavior - Load factor tradeoffs -
-Clustering phenomena - Memory layout & cache locality - Basic
-probabilistic analysis of hashing
+Understand: 
+- Multiplicative hashing behavior 
+- Load factor tradeoffs 
+- Clustering phenomena 
+- Memory layout & cache locality 
+- Basic probabilistic analysis of hashing
