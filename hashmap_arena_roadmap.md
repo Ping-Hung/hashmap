@@ -44,17 +44,19 @@
 
 ## Phase 5 -- Resizing & Rehashing
 
--   [ ]Trigger resize at load factor threshold (e.g., 0.75).
--   [ ]Rehash into new larger table.
--   [ ]Benchmark performance before and after resizing.
+-   [ ] Trigger resize at load factor threshold (e.g., 0.75).
+-   [ ] Rehash into new larger table.
+-   [ ] Benchmark performance before and after resizing.
 
 ------------------------------------------------------------------------
 
 ## Phase 6 -- Probabilistic Analysis Experiments
 
-Measure empirically: - Expected probe length vs load factor. -
-Distribution of displacement distances. - Collision frequency. -
-Performance degradation as load → 1.
+Measure empirically: 
+- Expected probe length vs load factor. 
+- Distribution of displacement distances. 
+- Collision frequency. 
+- Performance degradation as load → 1.
 
 Plot results and compare against theoretical expectations.
 
