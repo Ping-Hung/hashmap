@@ -1,16 +1,17 @@
 /**
  *          A MINImal UNIT-testing framework
  *  Usage Pattern:
- *  in test_module.c
- *  int test_func(void)
- *  {
- *      // Arrange
- *      mu_start(); // test case setup
- *      // Act
- *      // Assert
- *      mu_check(...)
- *      mu_end(); // test case teardown
- *  }
+ *     - A test case should look like
+ *          int test_func(void)
+ *          {
+ *              // Arrange
+ *              mu_start(); // test case setup
+ *              // Act
+ *              // Assert
+ *              mu_check(...)
+ *              mu_end(); // test case teardown
+ *          }
+ *      - A runner is supposed do mu_run(test_case); to run test_case
  */
 #ifndef __MINI_UNIT_H__
 #define __MINI_UNIT_H__
@@ -25,7 +26,9 @@
 #define ANSI_GREEN "\x1b[1;32m"
 #define ANSI_RESET "\x1b[0m"
 
+// Test case setup (a.k.a Arrange)
 #define mu_start() int _mu_first_failure_line_number_or_0 = MU_SUCCESS
+// Assert utilities
 #define mu_check(condition)								                                \
 	do { 										                                        \
 		if(((condition) == false) && (_mu_first_failure_line_number_or_0 == 0)) {       \
@@ -54,7 +57,9 @@
 			printf("s1 and s2 are identical\n");					                \
 		}										                                    \
 	} while(false)
+// end of Asserts
 
+// Test case teardown
 #define mu_end() return _mu_first_failure_line_number_or_0
 
 #endif /* End of __MINI_UNIT_H__ */
