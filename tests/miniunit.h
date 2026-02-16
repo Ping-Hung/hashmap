@@ -1,5 +1,19 @@
-#ifndef MINIMIUNIT_H
-#define MINIUNIT_H
+/**
+ *          A MINImal UNIT-testing framework
+ *  Usage Pattern:
+ *  in test_module.c
+ *  int test_func(void)
+ *  {
+ *      // Arrange
+ *      mu_start(); // test case setup
+ *      // Act
+ *      // Assert
+ *      mu_check(...)
+ *      mu_end(); // test case teardown
+ *  }
+ */
+#ifndef __MINI_UNIT_H__
+#define __MINI_UNIT_H__
 
 #include <string.h>
 #include <stdio.h>
@@ -43,4 +57,4 @@
 
 #define mu_end() return _mu_first_failure_line_number_or_0
 
-#endif /* End of MINIUNIT_H */
+#endif /* End of __MINI_UNIT_H__ */
