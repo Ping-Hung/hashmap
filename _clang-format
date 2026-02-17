@@ -1,0 +1,13 @@
+# global section I don't think this project requires
+# BasedOnStyle:  LLVM
+# IndentWidth: 4
+---
+Language: Cpp
+IndentWidth: 4
+UseTab: Never
+ColumnLimit: 90
+
+IndentCaseLabels: false
+
+BreakBeforeBraces: Linux
+
