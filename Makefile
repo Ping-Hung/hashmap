@@ -1,14 +1,13 @@
 # Variables and Macro setup
 CC=gcc
 FLAGS= -Wall -Werror -std=c2x -g
-T_TARGET=test
+T_TARGET=hashmap_test
 TARGET=hashmap
-
 
 SRC := $(wildcard src/*.c)
 TEST := $(wildcard tests/*.c)
 HEADERS := $(wildcard include/*.h)
-BUILD=build/
+BUILD=build
 
 VECHO=@echo
 
@@ -18,12 +17,12 @@ all: $(TARGET) $(T_TARGET)
 
 $(TARGET): $(SRC)
 	$(VECHO) "building hashmap executable..."
-	$(CC) $(SRC) main.c $(FLAGS) -o $(TARGET)
+	$(CC) $(SRC) main.c $(FLAGS) -o $(BUILD)/$(TARGET)
 	$(VECHO) "Done"
 
 $(T_TARGET): $(SRC) $(TEST)
 	$(VECHO) "building test runner..."
-	$(CC) $(SRC) $(TEST) $(FLAGS) -o $(T_TARGET)
+	$(CC) $(SRC) $(TEST) $(FLAGS) -o $(BUILD)/$(T_TARGET)
 	$(VECHO) "Done"
 
 # automation rules
@@ -36,7 +35,7 @@ format:
 	$(VECHO) "Done"
 
 clean:
-	rm -f $(TARGET) $(T_TARGET)
+	rm -f $(BUILD)/$(TARGET) $(BUILD)/$(T_TARGET)
 
 commit: format	# Depends on format (shall see format being executed before git commit -a
 	$(VECHO) "committing all changes..."
@@ -44,13 +43,13 @@ commit: format	# Depends on format (shall see format being executed before git c
 	$(VECHO) "Done"
 
 run: $(TARGET)
-	./$(TARGET)
+	./$(BUILD)/$(TARGET)
 
 v_run: $(TARGET)
-	valgrind -s --leak-check=full --track-origins=yes ./$(TARGET)  
+	valgrind -s --leak-check=full --track-origins=yes ./$(BUILD)/$(TARGET)
 
 test: $(T_TARGET)
-	./$(T_TARGET)
+	./$(BUILD)/$(T_TARGET)
 
 v_test: $(T_TARGET)
-	valgrind -s --leak-check=full --track-origins=yes ./$(T_TARGET)
+	valgrind -s --leak-check=full --track-origins=yes ./$(BUILD)/$(T_TARGET)
