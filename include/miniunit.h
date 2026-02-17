@@ -11,7 +11,7 @@
  *              mu_check(...)
  *              mu_end(); // test case teardown
  *          }
- *      - A runner is supposed do mu_run(test_case); to run test_case
+ *      - A runner is supposed to invoke mu_run(test_case_x); to run test_case_x
  */
 #ifndef __MINI_UNIT_H__
 #define __MINI_UNIT_H__
@@ -38,7 +38,7 @@
 
 #define mu_run(function)                                                                 \
     do {                                                                                 \
-        int result = function();                                                         \
+        int result = (function)();                                                       \
         if (result == 0) {                                                               \
             printf("%sTest passed:%s %s\n", ANSI_GREEN, #function, ANSI_RESET);          \
         } else {                                                                         \

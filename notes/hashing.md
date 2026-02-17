@@ -1,6 +1,6 @@
 # Hashing
 ## Hash Function
-|input|output|
+|input (**_key_**)|output (**_hash_**)|
 |:---:|:---:|
 |raw information|unique hash of a certain length|
 
