@@ -12,8 +12,8 @@ int test_hash_int64_0(void)
     mu_start(); // test case init (Arrange)
 
     // test case setup (Act)
-    int64_t key = 0;
-    int16_t result = hash_int64(key);
+    i16 key = 0;
+    i16 result = hash_int64(key);
 
     // asserts
     mu_check(result == 0x0); // a placeholder for now, maybe the final hash is a

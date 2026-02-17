@@ -2,13 +2,15 @@
 #define __HASHING_H__
 
 #include "../include/log_macros.h"
-#include <stdint.h>
 #include <stdlib.h>
+
+typedef long i64;
+typedef unsigned short u16;
 
 // As a starting point, hash tables will have 2^16 buckets maximum
 
 // functions and object/struct declarations for hashing
-uint16_t hash_int64(int64_t key); // long -> [0, 2^16 - 1]
-uint16_t hash_string(int8_t *key);
+u16 hash_int64(i64 key); // long -> [0, 2^16 - 1]
+u16 hash_string(char *key);
 
 #endif // end of __HASHING_H__
