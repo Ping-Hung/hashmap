@@ -16,12 +16,30 @@ all:
 	$(VECHO) "building final target..."
 
 
+.PHONY: format clean commit run test v_run v_test
 format:
-	$(VECHO) "fromatting all source files..."
+	$(VECHO) "formatting all source files..."
 	find . -regex '.*\.\(c\|h\)' \
 	-not -path "./build/*" \
 	-exec clang-format -i {} +
+	$(VECHO) "Done"
 
-	
+clean:
+	rm $(BUILD)/*
 
-.PHONY: clean format
+commit: format	# Depends on format (shall see format being executed before git commit -a
+	$(VECHO) "committing all changes..."
+	git commit -a
+	$(VECHO) "Done"
+
+run: $(TARGET)
+	./$(TARGET)
+
+v_run: $(TARGET)
+	valgrind -s --leak-check=full --track-origins=yes ./$(TARGET)  
+
+test: $(T_TARGET)
+	./$(T_TARGET)
+
+v_test: $(T_TARGET)
+	valgrind -s --leak-check=full --track-origins=yes ./$(TARGET)
