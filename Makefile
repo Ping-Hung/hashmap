@@ -39,6 +39,7 @@ clean:
 
 commit: format	# Depends on format (shall see format being executed before git commit -a
 	$(VECHO) "committing all changes..."
+	git add .
 	git commit -a
 	$(VECHO) "Done"
 

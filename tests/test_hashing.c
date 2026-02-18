@@ -1,7 +1,7 @@
-#include "test_hashing.h"
 #include "../include/hashing.h"
 #include "../include/log_macros.h"
 #include "../include/miniunit.h"
+#include "test_utils.h"
 
 // first define the test function above test_functions array, then add the
 // name to it
