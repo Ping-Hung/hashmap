@@ -21,10 +21,12 @@ typedef int (*runner_func_t)(void);
 
 // hash_int64
 extern test_case_t test_hash_ints[];
+extern char *hash_int_test_names[];
 extern int len_test_hash_ints;
 
 // hash_string
 extern test_case_t test_hash_strings[];
+extern char *hash_string_test_names[];
 extern int len_test_hash_strings;
 
 #endif // end of __TEST_UTILS_H__

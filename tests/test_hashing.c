@@ -32,8 +32,6 @@ int test_hash_int64_0(void)
 // string hash tests
 
 // Array of all test, shall be accessible by test runner file(s)
-int (*test_hash_ints[])(void) = {test_hash_int64_0};
+test_case_t test_hash_ints[] = {test_hash_int64_0};
+char *hash_int_test_names[] = {"test_hash_int64_0"};
 int len_test_hash_ints = sizeof(test_hash_ints) / sizeof(test_hash_ints[0]);
-
-// int (*test_hash_strings[])(void) = {};   // uncomment this when a hash_string test is
-// implemented int len_test_hash_strings =

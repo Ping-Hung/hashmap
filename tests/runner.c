@@ -50,7 +50,7 @@ int main(void)
         // run all test cases when options >= 4 (with fancy function pointers)
         int names_idx = 0;
         for (runner_func_t *runner = runners; runner < runners + len_runners; runner++) {
-            printf("testing %s...\n", names[names_idx++]);
+            printf("Testing %s...\n", names[names_idx++]);
             (*runner)();
             printf("Done.\n");
         }
@@ -63,9 +63,9 @@ error:
 
 static inline int run_test_hashing(void)
 {
-    printf("Testing int64 hashing...\n");
+    printf("Performing int64 hashing tests...\n");
     for (int i = 0; i < len_test_hash_ints; i++) {
-        mu_run(test_hash_ints[i]);
+        mu_run(test_hash_ints[i], hash_int_test_names[i]);
     }
     printf("Done.\n");
     // uncomment the folloowing when string hashing is implemented
