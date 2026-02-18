@@ -11,7 +11,7 @@ static inline int run_test_hash_list(void);
 char *names[] = {"hashing module", "allocator module", "hash_list module"};
 
 // test runners LUT
-runner_func_t runners[] = {run_test_hashing, run_test_allocator, run_test_hash_list};
+suite_runner_t runners[] = {run_test_hashing, run_test_allocator, run_test_hash_list};
 size_t len_runners = sizeof(runners) / sizeof(runners[0]);
 
 int main(void)
@@ -21,7 +21,7 @@ int main(void)
 
     // ask input
     while (1) {
-        printf("specify which module(s) to test: \n"
+        printf("Select module(s) to test: \n"
                "1. hashing test\n"
                "2. allocator test\n"
                "3. hash_list test\n"
@@ -43,13 +43,13 @@ int main(void)
 
     // run tests
     if (option < 4) {
-        printf("testing %s...\n", names[option - 1]);
+        printf("Testing %s...\n", names[option - 1]);
         runners[option - 1]();
         printf("Done.\n");
     } else {
         // run all test cases when options >= 4 (with fancy function pointers)
         int names_idx = 0;
-        for (runner_func_t *runner = runners; runner < runners + len_runners; runner++) {
+        for (suite_runner_t *runner = runners; runner < runners + len_runners; runner++) {
             printf("Testing %s...\n", names[names_idx++]);
             (*runner)();
             printf("Done.\n");
@@ -63,11 +63,16 @@ error:
 
 static inline int run_test_hashing(void)
 {
-    printf("Performing int64 hashing tests...\n");
+    int status = 1; // none passing because no test was run yet.
+    printf("Running int64 hashing tests...\n");
     for (int i = 0; i < len_test_hash_ints; i++) {
-        mu_run(test_hash_ints[i], hash_int_test_names[i]);
+        status = mu_run(test_hash_ints[i], hash_int_test_names[i]);
+        if (status != 0) {
+            printf("Some tests failed\n");
+            goto end;
+        }
     }
-    printf("Done.\n");
+    printf("All tests Passed.\n");
     // uncomment the folloowing when string hashing is implemented
     // printf("testing string hashing...");
     // for (int (**test)(void) = test_hash_ints; test < test_hash_ints +
@@ -75,7 +80,8 @@ static inline int run_test_hashing(void)
     //     mu_run((*test));
     // }
     // printf("Done.");
-    return 0;
+end:
+    return status;
 }
 
 static inline int run_test_allocator(void) { return 0; }

@@ -5,19 +5,20 @@
  * Declaration of test case function format, common test-case data
  * structures, and types for both the runner.c and all test_xxx.c
  *  - function format: a function pointer, return type: int, takes no parameters
- *  - test-case data structure: array of function pointers and their length
+ *  - test-case data structure: arrays of function pointers, their names, and
+ *  their lengths.
  */
 
-// test case function "format"
-typedef int (*test_case_t)(void);
-// runner function "format" (same as test_case_t for now)
-typedef int (*runner_func_t)(void);
+// A test suite is a function that runs a bunch of test cases; it is a function
+// that returns an int, with no parameter.
+typedef int (*suite_runner_t)(void);
 
-// Data structures are only **declared** with the extern keyword (i.e. compiler
-// only knows their existence, but don't know where they are stored, and what
-// values they store.)
-//
-// The actual storage location and value will be set in corresponding .c files.
+// Data structures here are **declared** with the extern keyword to tell the compiler:
+//  - These variables exists, and are supposed to be shared across files which
+//  includes test_utils.h.
+//  - These variables do not have an actual storage address and initialize
+//  values for now, and the actual storage location and value will be set in
+//  corresponding .c files.
 
 // hash_int64
 extern test_case_t test_hash_ints[];

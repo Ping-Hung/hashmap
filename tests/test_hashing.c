@@ -3,9 +3,6 @@
 #include "../include/miniunit.h"
 #include "test_utils.h"
 
-// first define the test function above test_functions array, then add the
-// name to it
-
 /**
  *  Hash algorithm testing requirements:
  *      - Determinism: if key1 = key2, then hash(key1) = hash(key2)
@@ -13,6 +10,9 @@
  *      - Fast Computation: O(1) requirement (maybe verify this with bench mark?)
  *      - Low collision probability: ...also not sure how to verify this
  */
+
+// 1. define test cases (actual testing logic) first
+// 2. Add test case and its name to the 2 arrays at the bottom of the file
 
 // int64 hash tests
 int test_hash_int64_0(void)
@@ -32,6 +32,7 @@ int test_hash_int64_0(void)
 // string hash tests
 
 // Array of all test, shall be accessible by test runner file(s)
+// Add test (name + name as a string) in both arrays
 test_case_t test_hash_ints[] = {test_hash_int64_0};
 char *hash_int_test_names[] = {"test_hash_int64_0"};
 int len_test_hash_ints = sizeof(test_hash_ints) / sizeof(test_hash_ints[0]);
