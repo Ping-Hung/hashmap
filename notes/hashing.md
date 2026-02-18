@@ -21,3 +21,8 @@
 
 
 ## Multiplicative Hashing
+For any key,
+1. Multiply it with a (non-integer) constant `A`.
+2. Take its **fraction part**.
+3. Expand it to table/map size.
+(Reference to Prof. Koh's 368 slides)

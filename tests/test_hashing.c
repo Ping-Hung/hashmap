@@ -2,6 +2,7 @@
 #include "../include/log_macros.h"
 #include "../include/miniunit.h"
 #include "test_utils.h"
+#include <limits.h>
 
 /**
  *  Hash algorithm testing requirements:
@@ -29,10 +30,33 @@ int test_hash_int64_0(void)
     mu_end();
 }
 
+int test_MAX_TABLE_SIZE()
+{
+    mu_start();
+    mu_check(MAX_TABLE_SIZE == (1U << 15));
+    mu_end();
+}
+
+int test_SHORT_MAX()
+{
+    mu_start();
+    mu_check(SHORT_MAX == SHRT_MAX);
+    mu_end();
+}
+
+int test_SHORT_MIN()
+{
+    mu_start();
+    mu_check(SHORT_MIN == SHRT_MIN);
+    mu_end();
+}
+
 // string hash tests
 
 // Array of all test, shall be accessible by test runner file(s)
 // Add test (name + name as a string) in both arrays
-test_case_t test_hash_ints[] = {test_hash_int64_0};
-char *hash_int_test_names[] = {"test_hash_int64_0"};
+test_case_t test_hash_ints[] = {test_hash_int64_0, test_MAX_TABLE_SIZE, test_SHORT_MAX,
+                                test_SHORT_MIN};
+char *hash_int_test_names[] = {"test_hash_int64_0", "test_MAX_TABLE_SIZE",
+                               "test_SHORT_MAX", "test_SHORT_MIN"};
 int len_test_hash_ints = sizeof(test_hash_ints) / sizeof(test_hash_ints[0]);

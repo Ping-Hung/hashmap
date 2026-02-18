@@ -5,13 +5,19 @@
 #include <stdlib.h>
 
 /**
- * Common types, data structures, and publically accessible apis (functions) for hashing*/
+ * Common types, data structures, and publically accessible apis (functions) for hashing
+ */
 
 typedef long i64;
 typedef unsigned short u16;
 
 // As a starting point, hash tables will have 2^16 buckets maximum
+#define MAX_TABLE_SIZE (1U << (sizeof(u16) * 8 - 1))
 
+#define SHORT_MAX MAX_TABLE_SIZE - 1
+#define SHORT_MIN (short)MAX_TABLE_SIZE
+// Constant for multiplicative method
+#define PHI 0.618034f
 // functions and object/struct declarations for hashing
 u16 hash_int64(i64 key); // long -> [0, 2^16 - 1]
 u16 hash_string(char *key);

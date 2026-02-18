@@ -61,7 +61,7 @@ typedef int (*test_case_t)(void);
 static inline int _run_test(test_case_t test, char *test_name)
 {
     assert(test && "parameter test must be a valid function address");
-    assert(test_name && "parameter test_name must be a valid function address");
+    assert(test_name && "parameter test_name must be a valid char *");
     int result = test();
     if (result == 0) {
         printf("%sTest passed:%s %s\n", ANSI_GREEN, test_name, ANSI_RESET);
