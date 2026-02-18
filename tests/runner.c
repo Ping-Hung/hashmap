@@ -21,7 +21,7 @@ int main(void)
 
     // ask input
     while (1) {
-        printf("specify what module(s) to test: \n"
+        printf("specify which module(s) to test: \n"
                "1. hashing test\n"
                "2. allocator test\n"
                "3. hash_list test\n"

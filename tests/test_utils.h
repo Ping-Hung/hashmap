@@ -8,16 +8,16 @@
  *  - test-case data structure: array of function pointers and their length
  */
 
+// test case function "format"
+typedef int (*test_case_t)(void);
+// runner function "format" (same as test_case_t for now)
+typedef int (*runner_func_t)(void);
+
 // Data structures are only **declared** with the extern keyword (i.e. compiler
 // only knows their existence, but don't know where they are stored, and what
 // values they store.)
 //
 // The actual storage location and value will be set in corresponding .c files.
-
-// test case function "format"
-typedef int (*test_case_t)(void);
-// runner function "format" (same as test_case_t for now)
-typedef int (*runner_func_t)(void);
 
 // hash_int64
 extern test_case_t test_hash_ints[];

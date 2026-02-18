@@ -4,6 +4,9 @@
 #include "../include/log_macros.h"
 #include <stdlib.h>
 
+/**
+ * Common types, data structures, and publically accessible apis (functions) for hashing*/
+
 typedef long i64;
 typedef unsigned short u16;
 

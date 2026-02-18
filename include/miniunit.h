@@ -36,13 +36,13 @@
         }                                                                                \
     } while (false)
 
-#define mu_run(function)                                                                 \
+#define mu_run(function, name)                                                           \
     do {                                                                                 \
         int result = (function)();                                                       \
         if (result == 0) {                                                               \
-            printf("%sTest passed:%s %s\n", ANSI_GREEN, #function, ANSI_RESET);          \
+            printf("%sTest passed:%s %s\n", ANSI_GREEN, name, ANSI_RESET);               \
         } else {                                                                         \
-            printf("%sTest failed:%s %s", ANSI_RED, #function, ANSI_RESET);              \
+            printf("%sTest failed:%s %s", ANSI_RED, name, ANSI_RESET);                   \
             printf("%s at line %d%s\n", ANSI_RED, result, ANSI_RESET);                   \
         }                                                                                \
     } while (false)

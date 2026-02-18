@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(void)
+// this now feels a lot more like a experiment sandbox XD
+int main(int argc, char *argv[])
 {
     log_size_t(sizeof(short));
     return EXIT_SUCCESS;
