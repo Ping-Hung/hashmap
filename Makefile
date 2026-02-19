@@ -21,8 +21,13 @@ $(TARGET): $(SRC)
 	$(VECHO) "Done"
 
 $(T_TARGET): $(SRC) $(TEST)
-	$(VECHO) "building test runner..."
+	$(VECHO) "building (regular) test runner..."
 	$(CC) $(SRC) $(TEST) $(FLAGS) -o $(BUILD)/$(T_TARGET)
+	$(VECHO) "Done"
+
+debug_test: clean $(SRC) $(TEST)
+	$(VECHO) "building test runner with debug symbol..."
+	$(CC) $(SRC) $(TEST) $(FLAGS) -o $(BUILD)/$(T_TARGET) -DDEBUG
 	$(VECHO) "Done"
 
 # automation rules
@@ -43,13 +48,13 @@ commit: format	# Depends on format (shall see format being executed before git c
 	git commit -a
 	$(VECHO) "Done"
 
-run: $(TARGET)
+run: 
 	./$(BUILD)/$(TARGET)
 
 v_run: $(TARGET)
 	valgrind -s --leak-check=full --track-origins=yes ./$(BUILD)/$(TARGET)
 
-test: $(T_TARGET)
+test: 
 	./$(BUILD)/$(T_TARGET)
 
 v_test: $(T_TARGET)

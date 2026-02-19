@@ -1,11 +1,11 @@
+#include <limits.h>
+#include <stdlib.h>
+#include <time.h>
+// #include <unistd.h>  // DON'T use sleep to generate distinct numbers!
 #include "../include/hashing.h"
 #include "../include/log_macros.h"
 #include "../include/miniunit.h"
 #include "test_utils.h"
-#include <limits.h>
-#include <stdlib.h>
-#include <time.h>
-#include <unistd.h>
 
 /**
  *  Hash algorithm testing requirements:
@@ -71,22 +71,35 @@ int test_hash_int64_regular(void)
     u16 hashes[3] = {0};
 
     // Act
-    srand(time(NULL)); // rand seed setup
-    for (int i = 0; i < sizeof(keys) / sizeof(keys[0]); i++) {
-        random = rand() % (SHORT_MAX - SHORT_MIN + 1); // 0 ≤ random ≤ SHORT_MAX
-        keys[i] = SHORT_MIN + random;
-        sleep(1); // sleep for 2 seconds to generate different numbers
+    srand(time(NULL));                             // rand seed setup
+    random = rand() % (SHORT_MAX - SHORT_MIN + 1); // 0 ≤ random ≤ SHORT_MAX
+    keys[0] = SHORT_MIN + random;
+    for (int i = 1; i < sizeof(keys) / sizeof(keys[0]); i++) {
+        do {
+            random = rand() % (SHORT_MAX - SHORT_MIN + 1);
+            keys[i] = SHORT_MIN + random;
+        } while (keys[i] == keys[i - 1]);
     }
-
+#ifdef DEBUG
+    log_int64(keys[0]);
+    log_int64(keys[1]);
+    log_int64(keys[2]);
+#endif
     // Asserts
     // case 1
-    log_int(hashes[0]);
+#ifdef DEBUG
+    log_int32(hashes[0]);
+#endif
     mu_check(0 <= hashes[0] && hashes[0] < MAX_TABLE_SIZE);
     // case 2
-    log_int(hashes[1]);
+#ifdef DEBUG
+    log_int32(hashes[1]);
+#endif
     mu_check(0 <= hashes[1] && hashes[1] < MAX_TABLE_SIZE);
     // case 3
-    log_int(hashes[2]);
+#ifdef DEBUG
+    log_int32(hashes[2]);
+#endif
     mu_check(0 <= hashes[2] && hashes[2] < MAX_TABLE_SIZE);
 
     mu_end();
