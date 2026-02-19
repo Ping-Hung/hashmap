@@ -20,5 +20,5 @@
 #define log_float(first_arg) fprintf(stderr, "%s == %.016f\n", (#first_arg), first_arg)
 #define log_bool(first_arg)                                                              \
     fprintf(stderr, "%s == %s\n", #first_arg, (first_arg) ? "true" : "false")
-
+#define log_hex_representation(arg) fprintf(stderr, "%s == %x\n", (#arg), arg)
 #endif /* end __LOG_MACROS_H__ */

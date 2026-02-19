@@ -14,8 +14,8 @@ typedef unsigned short u16;
 // As a starting point, hash tables will have 2^16 buckets maximum
 #define MAX_TABLE_SIZE (1U << (sizeof(u16) * 8 - 1))
 
-#define SHORT_MAX MAX_TABLE_SIZE - 1
-#define SHORT_MIN (short)MAX_TABLE_SIZE
+#define SHORT_MAX MAX_TABLE_SIZE - 1 // 2^16 - 1
+#define SHORT_MIN -MAX_TABLE_SIZE    // -2^16
 // Constant for multiplicative hashing
 #define PHI 0.618034f
 // functions and object/struct declarations for hashing

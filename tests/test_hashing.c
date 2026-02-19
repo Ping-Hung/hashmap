@@ -3,6 +3,9 @@
 #include "../include/miniunit.h"
 #include "test_utils.h"
 #include <limits.h>
+#include <stdlib.h>
+#include <time.h>
+#include <unistd.h>
 
 /**
  *  Hash algorithm testing requirements:
@@ -54,15 +57,37 @@ int test_hash_int64_max(void)
     mu_end();
 }
 
-static inline int test_hash_int64_regular(void)
+int test_hash_int64_regular(void)
 {
     /* regular cases:
-     *  - keys should satisfy: SHORT_MAX < key < SHORT_MAX
-     *  - hashes should satisfy SHORT_MAX < hash < SHORT_MAX
+     *  - keys should satisfy: SHORT_MIN< key < SHORT_MAX
+     *  - hashes should satisfy 0 < hash < MAX_TABLE_SIZE
      *
      *  Will use srand and rand to do some fuzzing withing the range
      */
-    mu_start();
+    mu_start(); // Arrange
+    i64 random;
+    i64 keys[3] = {0};
+    u16 hashes[3] = {0};
+
+    // Act
+    srand(time(NULL)); // rand seed setup
+    for (int i = 0; i < sizeof(keys) / sizeof(keys[0]); i++) {
+        random = rand() % (SHORT_MAX - SHORT_MIN + 1); // 0 ≤ random ≤ SHORT_MAX
+        keys[i] = SHORT_MIN + random;
+        sleep(1); // sleep for 2 seconds to generate different numbers
+    }
+
+    // Asserts
+    // case 1
+    log_int(hashes[0]);
+    mu_check(0 <= hashes[0] && hashes[0] < MAX_TABLE_SIZE);
+    // case 2
+    log_int(hashes[1]);
+    mu_check(0 <= hashes[1] && hashes[1] < MAX_TABLE_SIZE);
+    // case 3
+    log_int(hashes[2]);
+    mu_check(0 <= hashes[2] && hashes[2] < MAX_TABLE_SIZE);
 
     mu_end();
 }
