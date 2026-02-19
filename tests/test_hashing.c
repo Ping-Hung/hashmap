@@ -54,6 +54,19 @@ int test_hash_int64_max(void)
     mu_end();
 }
 
+static inline int test_hash_int64_regular(void)
+{
+    /* regular cases:
+     *  - keys should satisfy: SHORT_MAX < key < SHORT_MAX
+     *  - hashes should satisfy SHORT_MAX < hash < SHORT_MAX
+     *
+     *  Will use srand and rand to do some fuzzing withing the range
+     */
+    mu_start();
+
+    mu_end();
+}
+
 // constant setup tests
 int test_MAX_TABLE_SIZE()
 {
@@ -80,12 +93,13 @@ int test_SHORT_MIN()
 
 // Array of all test, shall be accessible by test runner file(s)
 // Add test (name + name as a string) in both arrays
-test_case_t test_hash_ints[] = {test_hash_int64_0,   test_MAX_TABLE_SIZE,
-                                test_SHORT_MAX,      test_SHORT_MIN,
-                                test_hash_int64_min, test_hash_int64_max};
+test_case_t test_hash_ints[] = {
+    test_hash_int64_0,   test_MAX_TABLE_SIZE, test_SHORT_MAX,         test_SHORT_MIN,
+    test_hash_int64_min, test_hash_int64_max, test_hash_int64_regular};
 
-char *hash_int_test_names[] = {"test_hash_int64_0",   "test_MAX_TABLE_SIZE",
-                               "test_SHORT_MAX",      "test_SHORT_MIN",
-                               "test_hash_int64_min", "test_hash_int64_max"};
+char *hash_int_test_names[] = {"test_hash_int64_0",      "test_MAX_TABLE_SIZE",
+                               "test_SHORT_MAX",         "test_SHORT_MIN",
+                               "test_hash_int64_min",    "test_hash_int64_max",
+                               "test_hash_int64_regular"};
 
 int len_test_hash_ints = sizeof(test_hash_ints) / sizeof(test_hash_ints[0]);

@@ -25,7 +25,7 @@ int main(void)
                "1. hashing test\n"
                "2. allocator test\n"
                "3. hash_list test\n"
-               "4. all\n"
+               "4. all of the above\n"
                "> ");
 
         status = scanf("%d", &option);

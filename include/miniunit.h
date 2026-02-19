@@ -2,7 +2,7 @@
  *          A MINImal UNIT-testing framework
  *  Usage Pattern:
  *     - A test case should look like
- *          int test_func(void)
+ *          int test_case_x(void)
  *          {
  *              // Arrange
  *              mu_start(); // test case setup
@@ -11,13 +11,12 @@
  *              mu_check(...)
  *              mu_end(); // test case teardown
  *          }
- *      - A runner is supposed to invoke mu_run(test_case_x); to run test_case_x
+ *      - A runner should invoke mu_run(test_case_x, "test_case_x"); to run test_case_x
  */
 #ifndef __MINI_UNIT_H__
 #define __MINI_UNIT_H__
 
 #include <assert.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -39,7 +38,7 @@ typedef int (*test_case_t)(void);
         if (!(condition) && (_mu_first_failure_line_number_or_0 == 0)) {                 \
             _mu_first_failure_line_number_or_0 = __LINE__;                               \
         }                                                                                \
-    } while (false)
+    } while (0)
 
 /* mu_check_strings_equal is potentially unsafe with the use of strcmp */
 #define mu_check_strings_equal(s1, s2)                                                   \
@@ -50,8 +49,7 @@ typedef int (*test_case_t)(void);
         } else {                                                                         \
             printf("s1 and s2 are identical\n");                                         \
         }                                                                                \
-    } while (false)
-// end of Asserts
+    } while (0)
 
 // Test case teardown
 #define mu_end() return _mu_first_failure_line_number_or_0

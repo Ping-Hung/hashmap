@@ -16,16 +16,16 @@ typedef unsigned short u16;
 
 #define SHORT_MAX MAX_TABLE_SIZE - 1
 #define SHORT_MIN (short)MAX_TABLE_SIZE
-// Constant for multiplicative method
+// Constant for multiplicative hashing
 #define PHI 0.618034f
 // functions and object/struct declarations for hashing
 
 static inline u16 hash_int64(i64 key)
 {
     /**
-     *      long -> unsigned short mapping
-     *      [-2^63, 2^63 - 1] -> [0, 2^15 - 1]
-     *   Some saturation is done on both endpoints of the interval, will do
+     *              long -> unsigned short mapping
+     *              [-2^63, 2^63 - 1] -> [0, 2^15 - 1]
+     *   Some saturation is done on both endpoints of the interval, use
      *   chaining to resolve hash confilct
      */
     if (key <= SHORT_MIN) {
@@ -36,7 +36,7 @@ static inline u16 hash_int64(i64 key)
     }
     // regular multiplicative hashing
     u16 hash = (u16)MAX_TABLE_SIZE * (key * PHI - (u16)(key * PHI));
-    //         Casting here b/c this macro is defined as a bit pattern...
+    //         Casting  b/c MAX_TABLE_SIZE is defined as a bit pattern...
     return hash;
 }
 
