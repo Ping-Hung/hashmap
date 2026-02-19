@@ -30,6 +30,31 @@ int test_hash_int64_0(void)
     mu_end();
 }
 
+int test_hash_int64_min(void)
+{
+    mu_start();
+
+    i64 min = (i64)(-(1ULL << 63));
+    u16 hash = hash_int64(min);
+
+    mu_check(hash == 0);
+
+    mu_end();
+}
+
+int test_hash_int64_max(void)
+{
+    mu_start();
+
+    i64 max = (i64)((1ULL << 63) - 1);
+    u16 hash = hash_int64(max);
+
+    mu_check(hash == (u16)MAX_TABLE_SIZE - 1);
+
+    mu_end();
+}
+
+// constant setup tests
 int test_MAX_TABLE_SIZE()
 {
     mu_start();
@@ -55,8 +80,12 @@ int test_SHORT_MIN()
 
 // Array of all test, shall be accessible by test runner file(s)
 // Add test (name + name as a string) in both arrays
-test_case_t test_hash_ints[] = {test_hash_int64_0, test_MAX_TABLE_SIZE, test_SHORT_MAX,
-                                test_SHORT_MIN};
-char *hash_int_test_names[] = {"test_hash_int64_0", "test_MAX_TABLE_SIZE",
-                               "test_SHORT_MAX", "test_SHORT_MIN"};
+test_case_t test_hash_ints[] = {test_hash_int64_0,   test_MAX_TABLE_SIZE,
+                                test_SHORT_MAX,      test_SHORT_MIN,
+                                test_hash_int64_min, test_hash_int64_max};
+
+char *hash_int_test_names[] = {"test_hash_int64_0",   "test_MAX_TABLE_SIZE",
+                               "test_SHORT_MAX",      "test_SHORT_MIN",
+                               "test_hash_int64_min", "test_hash_int64_max"};
+
 int len_test_hash_ints = sizeof(test_hash_ints) / sizeof(test_hash_ints[0]);

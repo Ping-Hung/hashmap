@@ -66,8 +66,8 @@ static inline int _run_test(test_case_t test, char *test_name)
     if (result == 0) {
         printf("%sTest passed:%s %s\n", ANSI_GREEN, test_name, ANSI_RESET);
     } else {
-        printf("%sTest failed:%s %s", ANSI_RED, test_name, ANSI_RESET);
-        printf("%s at line %d%s\n", ANSI_RED, result, ANSI_RESET);
+        printf("%sTest failed:%s at line %d%s\n", ANSI_RED, test_name, result,
+               ANSI_RESET);
     }
     return result;
 }

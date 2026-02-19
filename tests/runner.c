@@ -74,10 +74,13 @@ static inline int run_test_hashing(void)
     }
     printf("All tests Passed.\n");
     // uncomment the folloowing when string hashing is implemented
-    // printf("testing string hashing...");
-    // for (int (**test)(void) = test_hash_ints; test < test_hash_ints +
-    // len_test_hash_ints; test++) {
-    //     mu_run((*test));
+    // printf("Running string hashing tests...");
+    // for (int i = 0; i < len_test_hash_strings; i++) {
+    //     status = mu_run(test_hash_strings[i], hash_string_test_names[i]);
+    //     if (status != 0) {
+    //         printf("Some tests failed\n");
+    //         goto end;
+    //     }
     // }
     // printf("Done.");
 end:

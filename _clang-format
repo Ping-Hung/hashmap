@@ -11,3 +11,8 @@ IndentCaseLabels: false
 
 BreakBeforeBraces: Linux
 
+# array declaration format style
+Cpp11BracedListStyle: true
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortBlocksOnASingleLine: false

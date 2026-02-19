@@ -19,7 +19,27 @@ typedef unsigned short u16;
 // Constant for multiplicative method
 #define PHI 0.618034f
 // functions and object/struct declarations for hashing
-u16 hash_int64(i64 key); // long -> [0, 2^16 - 1]
-u16 hash_string(char *key);
+
+static inline u16 hash_int64(i64 key)
+{
+    /**
+     *      long -> unsigned short mapping
+     *      [-2^63, 2^63 - 1] -> [0, 2^15 - 1]
+     *   Some saturation is done on both endpoints of the interval, will do
+     *   chaining to resolve hash confilct
+     */
+    if (key <= SHORT_MIN) {
+        return 0;
+    }
+    if (key > SHORT_MAX) {
+        return MAX_TABLE_SIZE - 1; // **index** of 2^16-th bucket
+    }
+    // regular multiplicative hashing
+    u16 hash = (u16)MAX_TABLE_SIZE * (key * PHI - (u16)(key * PHI));
+    //         Casting here b/c this macro is defined as a bit pattern...
+    return hash;
+}
+
+// static inline u16 hash_string(char *key);
 
 #endif // end of __HASHING_H__
