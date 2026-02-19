@@ -73,18 +73,23 @@ int test_hash_int64_regular(void)
     // Act
     srand(time(NULL));                             // rand seed setup
     random = rand() % (SHORT_MAX - SHORT_MIN + 1); // 0 ≤ random ≤ SHORT_MAX
+    // generate keys and hashes
     keys[0] = SHORT_MIN + random;
     for (int i = 1; i < sizeof(keys) / sizeof(keys[0]); i++) {
         do {
             random = rand() % (SHORT_MAX - SHORT_MIN + 1);
             keys[i] = SHORT_MIN + random;
         } while (keys[i] == keys[i - 1]);
+        hashes[i] = hash_int64(keys[i]);
     }
+    hashes[0] = hash_int64(keys[0]);
+
 #ifdef DEBUG
     log_int64(keys[0]);
     log_int64(keys[1]);
     log_int64(keys[2]);
 #endif
+
     // Asserts
     // case 1
 #ifdef DEBUG
@@ -116,6 +121,7 @@ int test_MAX_TABLE_SIZE()
 int test_SHORT_MAX()
 {
     mu_start();
+    mu_check(SHORT_MAX > 0);
     mu_check(SHORT_MAX == SHRT_MAX);
     mu_end();
 }
@@ -123,7 +129,13 @@ int test_SHORT_MAX()
 int test_SHORT_MIN()
 {
     mu_start();
+    mu_check((short)SHORT_MIN < 0);
+    mu_check(SHORT_MIN < 0);
     mu_check(SHORT_MIN == SHRT_MIN);
+#ifdef DEBUG
+    log_hex_representation(SHORT_MIN);
+    log_int32(SHORT_MIN);
+#endif
     mu_end();
 }
 
