@@ -8,8 +8,12 @@
  * Common types, data structures, and publically accessible apis (functions) for hashing
  */
 
-typedef long i64;
+typedef short i16;
 typedef unsigned short u16;
+typedef int i32;
+typedef unsigned int u32;
+typedef long i64;
+typedef unsigned long u64;
 
 // As a starting point, hash tables will have 2^16 buckets maximum
 #define MAX_TABLE_SIZE (1U << (sizeof(u16) * 8 - 1))
@@ -50,12 +54,12 @@ static inline u16 hash_string(char *key)
      *      - mod with MAX_TABLE_SIZE (potential room for "clever" bit-level masking)
      */
     assert(key && "parameter key must be a valid char *");
-    u16 weighted_sum = 0;
-    u16 const base = 0;
+    u64 weighted_sum = 0;
+    u16 const base = 128;
     for (char *k = key; *k != '\0'; k++) {
         weighted_sum = base * weighted_sum + (u16)*k;
     }
-    return weighted_sum % MAX_TABLE_SIZE;
+    return (u16)weighted_sum % MAX_TABLE_SIZE;
 }
 
 #endif // end of __HASHING_H__
