@@ -25,7 +25,7 @@ $(T_TARGET): $(SRC) $(TEST)
 	$(CC) $(SRC) $(TEST) $(FLAGS) -o $(BUILD)/$(T_TARGET)
 	$(VECHO) "Done"
 
-debug_test: clean $(SRC) $(TEST)
+$(TARGET)_debug: $(SRC) $(TEST)
 	$(VECHO) "building test runner with debug symbol..."
 	$(CC) $(SRC) $(TEST) $(FLAGS) -o $(BUILD)/$(T_TARGET) -DDEBUG
 	$(VECHO) "Done"
@@ -48,7 +48,7 @@ commit: format	# Depends on format (shall see format being executed before git c
 	git commit -a
 	$(VECHO) "Done"
 
-run: 
+run: $(TARGET)
 	./$(BUILD)/$(TARGET)
 
 v_run: $(TARGET)
@@ -57,5 +57,5 @@ v_run: $(TARGET)
 test: 
 	./$(BUILD)/$(T_TARGET)
 
-v_test: $(T_TARGET)
+v_test: 
 	valgrind -s --leak-check=full --track-origins=yes ./$(BUILD)/$(T_TARGET)
