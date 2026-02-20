@@ -20,14 +20,22 @@ typedef int (*suite_runner_t)(void);
 //  values for now, and the actual storage location and value will be set in
 //  corresponding .c files.
 
-// hash_int64
+// --------hashing--------
 extern test_case_t test_hash_ints[];
 extern char *hash_int_test_names[];
 extern int len_test_hash_ints;
 
-// hash_string
 extern test_case_t test_hash_strings[];
 extern char *hash_string_test_names[];
 extern int len_test_hash_strings;
+
+// --------allocator--------
+extern test_case_t allocator_alloc_tests[];
+extern char *allocator_alloc_test_names[];
+extern int len_allocator_alloc_tests;
+
+extern test_case_t allocator_dealloc_tests[];
+extern char *allocator_dealloc_test_names[];
+extern int len_allocator_dealloc_tests;
 
 #endif // end of __TEST_UTILS_H__

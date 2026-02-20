@@ -68,25 +68,52 @@ static inline int run_test_hashing(void)
     for (int i = 0; i < len_test_hash_ints; i++) {
         status = mu_run(test_hash_ints[i], hash_int_test_names[i]);
         if (status != 0) {
-            printf("Some tests failed\n");
-            goto end;
+            goto failed;
         }
     }
-    // uncomment the folloowing when string hashing is implemented
+
     printf("Running string hashing tests...\n");
     for (int i = 0; i < len_test_hash_strings; i++) {
         status = mu_run(test_hash_strings[i], hash_string_test_names[i]);
         if (status != 0) {
             printf("Some tests failed\n");
-            goto end;
+            goto failed;
         }
     }
     printf("Done.\n");
-end:
     printf("All tests Passed.\n");
+    return status;
+failed:
+    printf("Some tests failed\n");
     return status;
 }
 
-static inline int run_test_allocator(void) { return 0; }
+static inline int run_test_allocator(void)
+{
+    int status = 1; // none passing because no test was run yet.
+
+    printf("Running tests on allocator_alloc...\n");
+    for (int i = 0; i < len_allocator_alloc_tests; i++) {
+        status = mu_run(allocator_alloc_tests[i], allocator_alloc_test_names[i]);
+        if (status != 0) {
+            goto failed;
+        }
+    }
+
+    printf("Running tests on allocator_dealloc...\n");
+    for (int i = 0; i < len_allocator_dealloc_tests; i++) {
+        status = mu_run(allocator_dealloc_tests[i], allocator_dealloc_test_names[i]);
+        if (status != 0) {
+            goto failed;
+        }
+    }
+
+    printf("Done.\n");
+    printf("All tests Passed.\n");
+    return status;
+failed:
+    printf("Some tests failed\n");
+    return status;
+}
 
 static inline int run_test_hash_list(void) { return 0; }
