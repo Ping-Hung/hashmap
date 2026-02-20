@@ -2,7 +2,7 @@
 
 ## Phase 1 -- Hash Function Fundamentals
 
--  [ ] Implement 64-bit integer hashing using multiplicative hashing.
+-  [x] Implement 64-bit integer hashing using multiplicative hashing.
 -  [ ] Implement string hashing with bit shifts and multiplication.
 -  [ ] Study avalanche effect (flip 1 bit → many output bits change).
 -  [ ] Write tests to measure collision rate and distribution quality.

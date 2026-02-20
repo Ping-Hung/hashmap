@@ -140,7 +140,27 @@ int test_SHORT_MIN()
 }
 
 // string hash tests
+static inline int test_hash_string_empty()
+{
+    mu_start(); // Arrange
+    // Act
+    char *key = "";
+    u16 hash = hash_string(key);
+    // Asert
+    mu_check(0 <= hash && hash <= MAX_TABLE_SIZE - 1);
+    mu_check(hash == 0);
+#ifdef DEBUG
+    log_hex_representation(hash);
+    log_uint32(hash);
+#endif
+    mu_end(); // Teardown
+}
 
+static inline int test_hash_string_1_char()
+{
+    mu_start();
+    mu_end();
+}
 // Array of all test, shall be accessible by test runner file(s)
 // Add test (name + name as a string) in both arrays
 test_case_t test_hash_ints[] = {
@@ -153,3 +173,7 @@ char *hash_int_test_names[] = {"test_hash_int64_0",      "test_MAX_TABLE_SIZE",
                                "test_hash_int64_regular"};
 
 int len_test_hash_ints = sizeof(test_hash_ints) / sizeof(test_hash_ints[0]);
+
+test_case_t test_hash_strings[] = {test_hash_string_empty, test_hash_string_1_char};
+char *hash_string_test_names[] = {"test_hash_string_empty", "test_hash_string_1_char"};
+int len_test_hash_strings = sizeof(test_hash_strings) / sizeof(test_hash_strings[0]);

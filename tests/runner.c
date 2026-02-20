@@ -72,18 +72,18 @@ static inline int run_test_hashing(void)
             goto end;
         }
     }
-    printf("All tests Passed.\n");
     // uncomment the folloowing when string hashing is implemented
-    // printf("Running string hashing tests...");
-    // for (int i = 0; i < len_test_hash_strings; i++) {
-    //     status = mu_run(test_hash_strings[i], hash_string_test_names[i]);
-    //     if (status != 0) {
-    //         printf("Some tests failed\n");
-    //         goto end;
-    //     }
-    // }
-    // printf("Done.");
+    printf("Running string hashing tests...\n");
+    for (int i = 0; i < len_test_hash_strings; i++) {
+        status = mu_run(test_hash_strings[i], hash_string_test_names[i]);
+        if (status != 0) {
+            printf("Some tests failed\n");
+            goto end;
+        }
+    }
+    printf("Done.\n");
 end:
+    printf("All tests Passed.\n");
     return status;
 }
 

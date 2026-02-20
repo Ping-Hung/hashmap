@@ -8,12 +8,8 @@ Hashmap implementation in C as an learning activity for learning
 5. **Basic probabilistic analysis of hashing**
 
 # TODO
-- [x] Write Makefile(s) to automate build and test.
-- [x] Set up test suite runner.
 - [ ] Have a basic understanding of linkage/storage duration (C programming concept).
-- [x] Implement 64-bit integer hashing using multiplicative hashing.
-    - [x] Apply the TDD cycle.
-    - [x] Test/tryout the Makefile(s)' automation.
+- [x] Implement string hashing with bit shifts and multiplication.
 
 # RoadMap
 - Credit: chatGPT

@@ -2,8 +2,8 @@
 #define __HASHING_H__
 
 #include "../include/log_macros.h"
+#include <assert.h>
 #include <stdlib.h>
-
 /**
  * Common types, data structures, and publically accessible apis (functions) for hashing
  */
@@ -41,6 +41,21 @@ static inline u16 hash_int64(i64 key)
     return hash;
 }
 
-// static inline u16 hash_string(char *key);
+static inline u16 hash_string(char *key)
+{
+    /*          key (stream of int8_t) -> hash ∈ [0, MAX_TABLE_SIZE - 1]
+     *  string := a large char (single byte) array
+     *      - Use all char in the array
+     *      - Somehow "condense" them into a single big number
+     *      - mod with MAX_TABLE_SIZE (potential room for "clever" bit-level masking)
+     */
+    assert(key && "parameter key must be a valid char *");
+    u16 weighted_sum = 0;
+    u16 const base = 0;
+    for (char *k = key; *k != '\0'; k++) {
+        weighted_sum = base * weighted_sum + (u16)*k;
+    }
+    return weighted_sum % MAX_TABLE_SIZE;
+}
 
 #endif // end of __HASHING_H__
