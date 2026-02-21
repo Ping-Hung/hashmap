@@ -52,6 +52,11 @@ int test_hash_int64_max(void)
     i64 max = (i64)((1ULL << 63) - 1);
     u16 hash = hash_int64(max);
 
+    mu_check(0 <= hash && hash <= (u16)MAX_TABLE_SIZE - 1);
+#ifdef DEBUG
+    log_uint32(MAX_TABLE_SIZE - 1);
+    log_uint32(hash);
+#endif
     mu_check(hash == (u16)MAX_TABLE_SIZE - 1);
 
     mu_end();
