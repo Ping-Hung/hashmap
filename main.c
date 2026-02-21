@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
         float as_float;
     } uintUfloat = {.as_float = PHI};
 
-
     log_float32(uintUfloat.as_float);
     log_uint32(uintUfloat.as_unsigned);
 
