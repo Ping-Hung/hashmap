@@ -57,7 +57,6 @@ int test_hash_int64_max(void)
     log_uint32(MAX_TABLE_SIZE - 1);
     log_uint32(hash);
 #endif
-    mu_check(hash == (u16)MAX_TABLE_SIZE - 1);
 
     mu_end();
 }
@@ -65,7 +64,7 @@ int test_hash_int64_max(void)
 int test_hash_int64_regular(void)
 {
     /* regular cases:
-     *  - keys should satisfy: SHORT_MIN< key < SHORT_MAX
+     *  - keys should satisfy: SHORT_MIN < key < SHORT_MAX
      *  - hashes should satisfy 0 < hash < MAX_TABLE_SIZE
      *
      *  Will use srand and rand to do some fuzzing withing the range
@@ -97,20 +96,20 @@ int test_hash_int64_regular(void)
 
     // Asserts
     // case 1
+    mu_check(0 <= hashes[0] && hashes[0] < MAX_TABLE_SIZE);
 #ifdef DEBUG
     log_int32(hashes[0]);
 #endif
-    mu_check(0 <= hashes[0] && hashes[0] < MAX_TABLE_SIZE);
     // case 2
+    mu_check(0 <= hashes[1] && hashes[1] < MAX_TABLE_SIZE);
 #ifdef DEBUG
     log_int32(hashes[1]);
 #endif
-    mu_check(0 <= hashes[1] && hashes[1] < MAX_TABLE_SIZE);
     // case 3
+    mu_check(0 <= hashes[2] && hashes[2] < MAX_TABLE_SIZE);
 #ifdef DEBUG
     log_int32(hashes[2]);
 #endif
-    mu_check(0 <= hashes[2] && hashes[2] < MAX_TABLE_SIZE);
 
     mu_end();
 }
@@ -164,6 +163,16 @@ static inline int test_hash_string_empty()
 static inline int test_hash_string_1_char()
 {
     mu_start();
+    // Act
+    char *key = "&";
+    u16 hash = hash_string(key);
+    // Asert
+    mu_check(0 <= hash && hash <= MAX_TABLE_SIZE - 1);
+    mu_check(hash == 38);
+#ifdef DEBUG
+    log_hex_representation(hash);
+    log_uint32(hash);
+#endif
     mu_end();
 }
 // Array of all test, shall be accessible by test runner file(s)

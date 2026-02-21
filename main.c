@@ -12,19 +12,19 @@ int main(int argc, char *argv[])
 
     printf("\nExperimenting with \"accessing casted address\" trick...\n"
            "This trick might cause memory accessing issues as the cast \"converts\" a "
-           "type to another: \n"
-           "When cast a smaller address to a longer one and accessing it, the program is "
-           "accessing uninitialized memory\n");
+           "smaller(shorter) type to a larger(wider) type. E.g. *(int *) &var_short.\n"
+           "An int is 4 bytes long while short is 2 bytes long, so dereference (access)"
+           " this casted address is accessing uninitialized memory\n");
     float phi = PHI;
     log_float32(phi);
     log_uint32((*(unsigned int *)&phi));
     // log_uint64((*(unsigned long *)&phi));    // memory access issue
     log_hex_representation((*(unsigned int *)&phi));
 
-    printf("\nA handy union trick to examine what happened above.\n"
+    printf("\nA handy union trick to examine what happened above: Viewing bit pattern"
+           " interpreted as different data type in a single memory address\n"
            "uintUfloat.as_unsigned and uintUfloat.as_float shared the same "
            "4-byte (32-bits) memory block on the stack\n");
-
     union {
         // this 32-bit (4 byte memory block on the call stack is shared by
         // as_unsigned and as_float
@@ -35,5 +35,7 @@ int main(int argc, char *argv[])
     log_float32(uintUfloat.as_float);
     log_uint32(uintUfloat.as_unsigned);
 
+    char *💕 = "Systems programming is lit 🔥";
+    log_str(💕);
     return EXIT_SUCCESS;
 }

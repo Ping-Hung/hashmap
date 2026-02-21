@@ -80,6 +80,7 @@ static inline int run_test_hashing(void)
             goto failed;
         }
     }
+
     printf("Done.\n");
     printf("All tests Passed.\n");
     return status;

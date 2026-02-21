@@ -28,7 +28,7 @@
 #define log_bool(first_arg)                                                              \
     fprintf(stderr, "%s == %s\n", #first_arg, (first_arg) ? "true" : "false")
 
-#define log_hex_representation(arg) fprintf(stderr, "%s == %x\n", (#arg), arg)
+#define log_hex_representation(arg) fprintf(stderr, "%s == 0x%x\n", (#arg), arg)
 
 #define log_int64(arg) fprintf(stderr, "%s == %ld\n", (#arg), arg)
 #endif /* end __LOG_MACROS_H__ */

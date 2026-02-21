@@ -11,7 +11,7 @@
  *              mu_check(...)
  *              mu_end(); // test case teardown
  *          }
- *          - static and inline are optional
+ *      - static and inline are optional (because they are storage/linkage specifiers?)
  *      - A runner should invoke mu_run(test_case_x, "test_case_x"); to run test_case_x
  */
 #ifndef __MINI_UNIT_H__

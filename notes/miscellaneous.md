@@ -8,3 +8,8 @@
 - Instruction count
 - Throughput
 
+# Low-Level Code Design Considerations (Topics of Concern)
+- Undefined behavior (UB)
+- Memory management
+- Portability across various architectures
+
