@@ -11,13 +11,14 @@
  */
 
 /**
- *  A test suite is a function that runs a bunch of test cases; 
+ *  A test suite is a function that runs a bunch of test cases;
  *  it is a function that returns an int, with no parameter.
  */
 typedef int (*suite_runner_t)(void);
 
 /**
- *  Data structures here are **declared** with the extern keyword to tell the compiler (that):
+ *  Data structures here are **declared** with the extern keyword to tell the compiler
+ * (that):
  *      - These variables exists, and are supposed to be shared across files
  *        which includes test_utils.h.
  *      - These variables do not have an actual storage region and initial

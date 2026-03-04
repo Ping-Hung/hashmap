@@ -6,9 +6,11 @@
 // this now feels a lot more like a experiment sandbox XD
 int main(int argc, char *argv[])
 {
+    log_uint64(sizeof(char));
     log_uint64(sizeof(short));
     log_uint64(sizeof(int));
     log_uint64(sizeof(long));
+    log_uint64(sizeof(long long));
 
     printf("\nExperimenting with \"accessing casted address\" trick...\n"
            "This trick might cause memory accessing issues as the cast \"converts\" a "
